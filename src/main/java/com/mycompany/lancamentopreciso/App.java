@@ -3,6 +3,8 @@ package com.mycompany.lancamentopreciso;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,21 +16,28 @@ import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-/**
- * JavaFX App
- */
 public class App extends Application {    
     
     @Override
     public void start(Stage stage) throws IOException {
         
-        // Importa e configura visualização da logo
+        
+        
+        /* ***********************************************   IMPORTAÇÕES   ********************************************** */
+        
+        // Importação da Imagem Logo
         Image logo = new Image(new FileInputStream("logo.PNG"));
-        ImageView logoView = new ImageView(logo);
-        logoView.setX(125);
-        logoView.setY(-40);
-        logoView.setFitHeight(300);
-        logoView.setFitWidth(300);
+        
+        
+        
+        /*  **********************************************   TELA PRINCIPAL   ********************************************** */
+        
+        // Configura Visualização da Logo
+        ImageView logoViewTelaPrincipal = new ImageView(logo);
+        logoViewTelaPrincipal.setX(125);
+        logoViewTelaPrincipal.setY(-40);
+        logoViewTelaPrincipal.setFitHeight(300);
+        logoViewTelaPrincipal.setFitWidth(300);
         
         // Configuração Texto "O QUE DESEJA CALCULAR"
         Rectangle blocoTextoOQueDesejaCalcular = new Rectangle(300, 30);
@@ -115,7 +124,7 @@ public class App extends Application {
         botaoAlcanceHorizontal.setLayoutY(360);
         botaoAlcanceHorizontal.setMinWidth(235);
         
-        // Grupo para aba Seleção de Calculos
+        // Grupo para aba de Seleção de Calculos
         Group abaSeleçãoDeCalculos = new Group(abaOQueDesejaCalcular, abaMovimentoVertical, abaMovimentoHorizontal, 
                 botaoPosicaoVerticalEmFuncaoDoTempo, botaoVelocidadeVerticalEmFuncaoDoTempo, botaoTempoDeSubida, 
                 botaoAlturaMaxima, botaoPosicaoHorizontalEmFuncaoDoTempo, botaoAlcanceHorizontal);
@@ -126,7 +135,7 @@ public class App extends Application {
         botaoEntendaOQueELancamentoObliquo.setLayoutY(30);
         botaoEntendaOQueELancamentoObliquo.setMinSize(200, 40);
         
-        // Configuração Graficos
+        // Configuração da Area de Graficos
         Rectangle blocoGraficos = new Rectangle(600, 400);
         blocoGraficos.setX(550);
         blocoGraficos.setY(80);
@@ -140,7 +149,7 @@ public class App extends Application {
         Group grafico = new Group(blocoGraficos);
         
         // Configuração Texto "Resultados"
-        Rectangle blocoTextoResultados = new Rectangle(300, 40);
+        Rectangle blocoTextoResultados = new Rectangle(600, 40);
         blocoTextoResultados.setX(550);
         blocoTextoResultados.setY(500);
         blocoTextoResultados.setFill(Color.WHITE);
@@ -155,25 +164,209 @@ public class App extends Application {
         textoResultados.setFont(Font.font("", 14));
         
         Group resultados = new Group(blocoTextoResultados, textoResultados);
+
+        // Grupo Tela Principal
+        Group grupoTelaPrincipal = new Group(logoViewTelaPrincipal, abaSeleçãoDeCalculos, botaoEntendaOQueELancamentoObliquo, 
+                grafico, resultados);
         
-        // Configuração Botão "Calculo Completo"
-        Button botaoCalculoCompleto = new Button("Cálculo Completo");
-        botaoCalculoCompleto.setLayoutX(950);
-        botaoCalculoCompleto.setLayoutY(500);
-        botaoCalculoCompleto.setMinSize(200, 40);
+        // Configuração da Cena
+        var telaPrincipal = new Scene(grupoTelaPrincipal,1200, 600);
         
-        // grupo tela inteira
-        Group telaInteira = new Group(logoView, abaSeleçãoDeCalculos, botaoEntendaOQueELancamentoObliquo, 
-                grafico, botaoCalculoCompleto, resultados);
         
-        // configuração da cena
-        var scene = new Scene(telaInteira,1200, 600);
-        stage.setScene(scene);
-        stage.show();
+        
+        /*  **********************************************   TELA O QUE É LANÇAMENTO OBLIQUO   ********************************************** */  
+        
+        //Configuracao aba: Posicao Vertical em Funcao do Tempo
+        Rectangle blocoTextoPosicaoVerticalEmFuncaoDoTempo = new Rectangle(180, 60);
+        blocoTextoPosicaoVerticalEmFuncaoDoTempo.setX(10);
+        blocoTextoPosicaoVerticalEmFuncaoDoTempo.setY(10);
+        blocoTextoPosicaoVerticalEmFuncaoDoTempo.setArcHeight(10);
+        blocoTextoPosicaoVerticalEmFuncaoDoTempo.setArcWidth(10);
+        blocoTextoPosicaoVerticalEmFuncaoDoTempo.setFill(Color.TURQUOISE);
+        
+        Text textoPosicaoVerticalEmFuncaoDoTempo = new Text("Posicao Vertical em\n Função do Tempo");
+        textoPosicaoVerticalEmFuncaoDoTempo.setX(40);
+        textoPosicaoVerticalEmFuncaoDoTempo.setY(35);
+        textoPosicaoVerticalEmFuncaoDoTempo.setFill(Color.BLACK);
+        textoPosicaoVerticalEmFuncaoDoTempo.setFont(Font.font("", 14));
+        
+        Rectangle blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo = new Rectangle(180,200);
+        blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo.setX(10);
+        blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo.setY(80);
+        blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo.setArcHeight(10);
+        blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo.setArcWidth(10);
+        blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo.setFill(Color.WHITE);
+        blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo.setStroke(Color.BLACK);
+        
+        Group abaPosicaoVerticalEmFuncaoDoTempo = new Group(blocoTextoPosicaoVerticalEmFuncaoDoTempo, textoPosicaoVerticalEmFuncaoDoTempo, 
+                blocoExplicacaoPosicaoVerticalEmFuncaoDoTempo);
+        
+        //Configuracao aba: Velocidade Vertical em Funcao do Tempo
+        Rectangle blocoTextoVelocidadeVerticalEmFuncaoDoTempo = new Rectangle(180, 60);
+        blocoTextoVelocidadeVerticalEmFuncaoDoTempo.setX(200);
+        blocoTextoVelocidadeVerticalEmFuncaoDoTempo.setY(10);
+        blocoTextoVelocidadeVerticalEmFuncaoDoTempo.setArcHeight(10);
+        blocoTextoVelocidadeVerticalEmFuncaoDoTempo.setArcWidth(10);
+        blocoTextoVelocidadeVerticalEmFuncaoDoTempo.setFill(Color.TURQUOISE);
+        
+        Text textoVelocidadeVerticalEmFuncaoDoTempo = new Text("Velocidade Vertical em\n   Função do Tempo");
+        textoVelocidadeVerticalEmFuncaoDoTempo.setX(220);
+        textoVelocidadeVerticalEmFuncaoDoTempo.setY(35);
+        textoVelocidadeVerticalEmFuncaoDoTempo.setFill(Color.BLACK);
+        textoVelocidadeVerticalEmFuncaoDoTempo.setFont(Font.font("", 14));
+        
+        Rectangle blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo = new Rectangle(180,200);
+        blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo.setX(200);
+        blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo.setY(80);
+        blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo.setArcHeight(10);
+        blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo.setArcWidth(10);
+        blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo.setFill(Color.WHITE);
+        blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo.setStroke(Color.BLACK);
+        
+        Group abaVelocidadeVerticalEmFuncaoDoTempo = new Group(blocoTextoVelocidadeVerticalEmFuncaoDoTempo, textoVelocidadeVerticalEmFuncaoDoTempo, 
+                blocoExplicacaoVelocidadeVerticalEmFuncaoDoTempo);
+        
+        //Configuracao aba: Tempo de Subida
+        Rectangle blocoTextoTempoDeSubida = new Rectangle(180, 60);
+        blocoTextoTempoDeSubida.setX(390);
+        blocoTextoTempoDeSubida.setY(10);
+        blocoTextoTempoDeSubida.setArcHeight(10);
+        blocoTextoTempoDeSubida.setArcWidth(10);
+        blocoTextoTempoDeSubida.setFill(Color.TURQUOISE);
+        
+        Text textoTempoDeSubida = new Text("Tempo de Subida");
+        textoTempoDeSubida.setX(425);
+        textoTempoDeSubida.setY(45);
+        textoTempoDeSubida.setFill(Color.BLACK);
+        textoTempoDeSubida.setFont(Font.font("", 14));
+        
+        Rectangle blocoExplicacaoTempoDeSubida = new Rectangle(180,200);
+        blocoExplicacaoTempoDeSubida.setX(390);
+        blocoExplicacaoTempoDeSubida.setY(80);
+        blocoExplicacaoTempoDeSubida.setArcHeight(10);
+        blocoExplicacaoTempoDeSubida.setArcWidth(10);
+        blocoExplicacaoTempoDeSubida.setFill(Color.WHITE);
+        blocoExplicacaoTempoDeSubida.setStroke(Color.BLACK);
+        
+        Group abaTempoDeSubida = new Group(blocoTextoTempoDeSubida, textoTempoDeSubida, 
+                blocoExplicacaoTempoDeSubida);
+        
+        //Configuracao aba: Altura Máxima
+        Rectangle blocoTextoAlturaMaxima = new Rectangle(180, 60);
+        blocoTextoAlturaMaxima.setX(580);
+        blocoTextoAlturaMaxima.setY(10);
+        blocoTextoAlturaMaxima.setArcHeight(10);
+        blocoTextoAlturaMaxima.setArcWidth(10);
+        blocoTextoAlturaMaxima.setFill(Color.TURQUOISE);
+        
+        Text textoAlturaMaxima = new Text("Altura Máxima");
+        textoAlturaMaxima.setX(625);
+        textoAlturaMaxima.setY(45);
+        textoAlturaMaxima.setFill(Color.BLACK);
+        textoAlturaMaxima.setFont(Font.font("", 14));
+        
+        Rectangle blocoExplicacaoAlturaMaxima = new Rectangle(180,200);
+        blocoExplicacaoAlturaMaxima.setX(580);
+        blocoExplicacaoAlturaMaxima.setY(80);
+        blocoExplicacaoAlturaMaxima.setArcHeight(10);
+        blocoExplicacaoAlturaMaxima.setArcWidth(10);
+        blocoExplicacaoAlturaMaxima.setFill(Color.WHITE);
+        blocoExplicacaoAlturaMaxima.setStroke(Color.BLACK);
+        
+        Group abaAlturaMaxima = new Group(blocoTextoAlturaMaxima, textoAlturaMaxima, 
+                blocoExplicacaoAlturaMaxima);
+        
+        //Configuracao aba: Posição Horizontal Em Função do Tempo
+        Rectangle blocoTextoPosicaoHorizontalEmFuncaoDoTempo = new Rectangle(180, 60);
+        blocoTextoPosicaoHorizontalEmFuncaoDoTempo.setX(10);
+        blocoTextoPosicaoHorizontalEmFuncaoDoTempo.setY(300);
+        blocoTextoPosicaoHorizontalEmFuncaoDoTempo.setArcHeight(10);
+        blocoTextoPosicaoHorizontalEmFuncaoDoTempo.setArcWidth(10);
+        blocoTextoPosicaoHorizontalEmFuncaoDoTempo.setFill(Color.TURQUOISE);
+        
+        Text textoPosicaoHorizontalEmFuncaoDoTempo = new Text("Posicao Horizontal em\n   Função do Tempo");
+        textoPosicaoHorizontalEmFuncaoDoTempo.setX(30);
+        textoPosicaoHorizontalEmFuncaoDoTempo.setY(325);
+        textoPosicaoHorizontalEmFuncaoDoTempo.setFill(Color.BLACK);
+        textoPosicaoHorizontalEmFuncaoDoTempo.setFont(Font.font("", 14));
+        
+        Rectangle blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo = new Rectangle(180,200);
+        blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo.setX(10);
+        blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo.setY(370);
+        blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo.setArcHeight(10);
+        blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo.setArcWidth(10);
+        blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo.setFill(Color.WHITE);
+        blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo.setStroke(Color.BLACK);
+        
+        Group abaPosicaoHorizontalEmFuncaoDoTempo = new Group(blocoTextoPosicaoHorizontalEmFuncaoDoTempo, textoPosicaoHorizontalEmFuncaoDoTempo, 
+                blocoExplicacaoPosicaoHorizontalEmFuncaoDoTempo);
+        
+        //Configuracao aba: Alcance Horizontal
+        Rectangle blocoTextoAlcanceHorizontal = new Rectangle(180, 60);
+        blocoTextoAlcanceHorizontal.setX(200);
+        blocoTextoAlcanceHorizontal.setY(300);
+        blocoTextoAlcanceHorizontal.setArcHeight(10);
+        blocoTextoAlcanceHorizontal.setArcWidth(10);
+        blocoTextoAlcanceHorizontal.setFill(Color.TURQUOISE);
+        
+        Text textoAlcanceHorizontal = new Text("Alcance Horizontal");
+        textoAlcanceHorizontal.setX(230);
+        textoAlcanceHorizontal.setY(335);
+        textoAlcanceHorizontal.setFill(Color.BLACK);
+        textoAlcanceHorizontal.setFont(Font.font("", 14));
+        
+        Rectangle blocoExplicacaoAlcanceHorizontal = new Rectangle(180,200);
+        blocoExplicacaoAlcanceHorizontal.setX(200);
+        blocoExplicacaoAlcanceHorizontal.setY(370);
+        blocoExplicacaoAlcanceHorizontal.setArcHeight(10);
+        blocoExplicacaoAlcanceHorizontal.setArcWidth(10);
+        blocoExplicacaoAlcanceHorizontal.setFill(Color.WHITE);
+        blocoExplicacaoAlcanceHorizontal.setStroke(Color.BLACK);
+        
+        Group abaAlcanceHorizontal = new Group(blocoTextoAlcanceHorizontal, textoAlcanceHorizontal, 
+                blocoExplicacaoAlcanceHorizontal);
+        
+        // Configuração Botão "Retornar a Tela Principal"
+        Button botaoRetornarATelaPrincipal = new Button("Retornar à Tela Principal");
+        botaoRetornarATelaPrincipal.setLayoutX(600);
+        botaoRetornarATelaPrincipal.setLayoutY(530);
+        botaoRetornarATelaPrincipal.setMinSize(150, 40);
+
+        //Grupo Tela "OQueELancamentoObliquo"
+        Group grupoTelaOQueELancamentoObliquo = new Group(abaPosicaoVerticalEmFuncaoDoTempo, abaVelocidadeVerticalEmFuncaoDoTempo, abaTempoDeSubida,
+         abaAlturaMaxima, abaPosicaoHorizontalEmFuncaoDoTempo, abaAlcanceHorizontal, botaoRetornarATelaPrincipal);
+        
+        // Configuração da Cena
+        var telaOQueELancamentoObliquo = new Scene(grupoTelaOQueELancamentoObliquo, 800, 600);
+
+
+        
+        /*  **********************************************   CONFIGURAÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
+
+        // Funcionalidade para Abrir a Tela Principal
+        EventHandler<ActionEvent> abrirTelaPrincipal = (ActionEvent e) -> {
+            stage.setScene(telaPrincipal);
+        };
+        
+        //Funcionalidade para Abrir a Tela De Explicações sobre Lançamento Obliquo
+        EventHandler<ActionEvent> abrirTelaExplicacoes = (ActionEvent e) -> {
+            stage.setScene(telaOQueELancamentoObliquo);
+        };
+
+        
+        
+        /*  **********************************************   ATRIBUIÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
+        botaoEntendaOQueELancamentoObliquo.setOnAction(abrirTelaExplicacoes);
+        botaoRetornarATelaPrincipal.setOnAction(abrirTelaPrincipal);
+    
+        
+        
+        /*  **********************************************   SETTING DA CENA INICIAL   ********************************************** */
+        stage.setScene(telaPrincipal);
+        stage.show();  
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }
