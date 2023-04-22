@@ -14,20 +14,21 @@ import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-
 /**
  * JavaFX App
  */
-public class App extends Application {
-
+public class App extends Application {    
+    
     @Override
     public void start(Stage stage) throws IOException {
         
         // Importa e configura visualização da logo
         Image logo = new Image(new FileInputStream("logo.PNG"));
         ImageView logoView = new ImageView(logo);
-        logoView.setX(185);
-        logoView.setY(30);
+        logoView.setX(125);
+        logoView.setY(-40);
+        logoView.setFitHeight(300);
+        logoView.setFitWidth(300);
         
         // Configuração Texto "O QUE DESEJA CALCULAR"
         Rectangle blocoTextoOQueDesejaCalcular = new Rectangle(300, 30);
@@ -42,7 +43,7 @@ public class App extends Application {
         textoOQueDesejaCalcular.setX(190);
         textoOQueDesejaCalcular.setY(220);
         textoOQueDesejaCalcular.setFill(Color.BLACK);
-        textoOQueDesejaCalcular.setFont(Font.font("Liberation Sans", 14));
+        textoOQueDesejaCalcular.setFont(Font.font("", 14));
         
         Group abaOQueDesejaCalcular = new Group(blocoTextoOQueDesejaCalcular, textoOQueDesejaCalcular);
         
@@ -58,7 +59,7 @@ public class App extends Application {
         textoMovimentoVertical.setX(68);
         textoMovimentoVertical.setY(275);
         textoMovimentoVertical.setFill(Color.BLACK);
-        textoMovimentoVertical.setFont(Font.font("Orbitron", 14));
+        textoMovimentoVertical.setFont(Font.font("", 14));
         
         Group abaMovimentoVertical = new Group(blocoTextoMovimentoVertical, textoMovimentoVertical);
         
@@ -74,7 +75,7 @@ public class App extends Application {
         textoMovimentoHorizontal.setX(312);
         textoMovimentoHorizontal.setY(275);
         textoMovimentoHorizontal.setFill(Color.BLACK);
-        textoMovimentoHorizontal.setFont(Font.font("Orbitron", 14));
+        textoMovimentoHorizontal.setFont(Font.font("", 14));
         
         Group abaMovimentoHorizontal = new Group(blocoTextoMovimentoHorizontal, textoMovimentoHorizontal);
         
@@ -125,8 +126,45 @@ public class App extends Application {
         botaoEntendaOQueELancamentoObliquo.setLayoutY(30);
         botaoEntendaOQueELancamentoObliquo.setMinSize(200, 40);
         
+        // Configuração Graficos
+        Rectangle blocoGraficos = new Rectangle(600, 400);
+        blocoGraficos.setX(550);
+        blocoGraficos.setY(80);
+        blocoGraficos.setHeight(400);
+        blocoGraficos.setWidth(600);
+        blocoGraficos.setFill(Color.WHITE);
+        blocoGraficos.setStroke(Color.BLACK);
+        blocoGraficos.setArcHeight(10);
+        blocoGraficos.setArcWidth(10);
+        
+        Group grafico = new Group(blocoGraficos);
+        
+        // Configuração Texto "Resultados"
+        Rectangle blocoTextoResultados = new Rectangle(300, 40);
+        blocoTextoResultados.setX(550);
+        blocoTextoResultados.setY(500);
+        blocoTextoResultados.setFill(Color.WHITE);
+        blocoTextoResultados.setStroke(Color.BLACK);
+        blocoTextoResultados.setArcHeight(10);
+        blocoTextoResultados.setArcWidth(10);
+        
+        Text textoResultados = new Text("*STRING RESULTADO*");
+        textoResultados.setX(600);
+        textoResultados.setY(525);
+        textoResultados.setFill(Color.BLACK);
+        textoResultados.setFont(Font.font("", 14));
+        
+        Group resultados = new Group(blocoTextoResultados, textoResultados);
+        
+        // Configuração Botão "Calculo Completo"
+        Button botaoCalculoCompleto = new Button("Cálculo Completo");
+        botaoCalculoCompleto.setLayoutX(950);
+        botaoCalculoCompleto.setLayoutY(500);
+        botaoCalculoCompleto.setMinSize(200, 40);
+        
         // grupo tela inteira
-        Group telaInteira = new Group(logoView, abaSeleçãoDeCalculos, botaoEntendaOQueELancamentoObliquo);
+        Group telaInteira = new Group(logoView, abaSeleçãoDeCalculos, botaoEntendaOQueELancamentoObliquo, 
+                grafico, botaoCalculoCompleto, resultados);
         
         // configuração da cena
         var scene = new Scene(telaInteira,1200, 600);
