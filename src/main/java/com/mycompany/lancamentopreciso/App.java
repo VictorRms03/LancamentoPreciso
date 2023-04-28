@@ -22,7 +22,10 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         
         
-        
+        /* ***********************************************   DECLARAÇÃO DE OBJETOS   ********************************************** */
+                
+                
+                
         /* ***********************************************   IMPORTAÇÕES   ********************************************** */
         
         // Importação da Imagem Logo
@@ -339,7 +342,78 @@ public class App extends Application {
         // Configuração da Cena
         var telaOQueELancamentoObliquo = new Scene(grupoTelaOQueELancamentoObliquo, 800, 600);
 
+        
+        
+        /*  **********************************************   TELA ENTRADA DE DADOS   ********************************************** */  
+        
+        // Configura Visualização da Logo
+        ImageView logoViewTelaEntradaDeDados = new ImageView(logo);
+        logoViewTelaEntradaDeDados.setX(100);
+        logoViewTelaEntradaDeDados.setY(-40);
+        logoViewTelaEntradaDeDados.setFitHeight(300);
+        logoViewTelaEntradaDeDados.setFitWidth(300);
 
+        //Configuracao aba: Entrada de Dados
+        Rectangle blocoEntradaDeDados = new Rectangle(400, 200);
+        blocoEntradaDeDados.setX(50);
+        blocoEntradaDeDados.setY(200);
+        blocoEntradaDeDados.setArcHeight(10);
+        blocoEntradaDeDados.setArcWidth(10);
+        blocoEntradaDeDados.setFill(Color.WHITE);
+        blocoEntradaDeDados.setStroke(Color.BLACK);
+        
+        Text textoEntradaDeDados = new Text("ENTRADA DE DADOS");
+        textoEntradaDeDados.setX(185);
+        textoEntradaDeDados.setY(240);
+        textoEntradaDeDados.setFill(Color.BLACK);
+        textoEntradaDeDados.setFont(Font.font("", 16));
+        
+        Text textoExemploFormula = new Text(Calculos.getFormula());
+        textoExemploFormula.setX(185);
+        textoExemploFormula.setY(270);
+        textoExemploFormula.setFill(Color.BLACK);
+        textoExemploFormula.setFont(Font.font("", 14));
+        
+        Text textoEntrada1 = new Text(Calculos.getEntrada1());
+        textoEntrada1.setX(215);
+        textoEntrada1.setY(300);
+        textoEntrada1.setFill(Color.BLACK);
+        textoEntrada1.setFont(Font.font("", 14));
+        
+        Text textoEntrada2 = new Text(Calculos.getEntrada2());
+        textoEntrada2.setX(215);
+        textoEntrada2.setY(320);
+        textoEntrada2.setFill(Color.BLACK);
+        textoEntrada2.setFont(Font.font("", 14));
+        
+        Text textoEntrada3 = new Text(Calculos.getEntrada3());
+        textoEntrada3.setX(215);
+        textoEntrada3.setY(340);
+        textoEntrada3.setFill(Color.BLACK);
+        textoEntrada3.setFont(Font.font("", 14));
+        
+        Group abaEntradaDeDados = new Group(blocoEntradaDeDados, textoEntradaDeDados, textoExemploFormula, textoEntrada1,
+                textoEntrada2, textoEntrada3);
+        
+        // Configuração Botão "Efetuar Calculo"
+        Button botaoEfetuarCalculo = new Button("Efetuar Calculo");
+        botaoEfetuarCalculo.setLayoutX(50);
+        botaoEfetuarCalculo.setLayoutY(450);
+        botaoEfetuarCalculo.setMinSize(150, 40);
+        
+        // Configuração Botão "Cancelar"
+        Button botaoCancelar = new Button("Cancelar");
+        botaoCancelar.setLayoutX(300);
+        botaoCancelar.setLayoutY(450);
+        botaoCancelar.setMinSize(150, 40);
+        
+        // Grupo Tela "EntradaDeDados"
+        Group grupoTelaEntradaDeDados = new Group(logoViewTelaEntradaDeDados, abaEntradaDeDados, botaoEfetuarCalculo, botaoCancelar);
+        
+        // Configuração da Cena
+        var telaEntradaDeDados = new Scene(grupoTelaEntradaDeDados, 500, 600);
+        
+        
         
         /*  **********************************************   CONFIGURAÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
 
@@ -352,17 +426,26 @@ public class App extends Application {
         EventHandler<ActionEvent> abrirTelaExplicacoes = (ActionEvent e) -> {
             stage.setScene(telaOQueELancamentoObliquo);
         };
+        
+        EventHandler<ActionEvent> abrirEntradaCalculosPosicaoVerticalEmFuncaoDoTempo = (ActionEvent e) -> {
+            stage.setScene(telaEntradaDeDados);
+        };
 
         
         
         /*  **********************************************   ATRIBUIÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
         botaoEntendaOQueELancamentoObliquo.setOnAction(abrirTelaExplicacoes);
+        
         botaoRetornarATelaPrincipal.setOnAction(abrirTelaPrincipal);
-    
+        
+        botaoCancelar.setOnAction(abrirTelaPrincipal);
+        
+        botaoPosicaoVerticalEmFuncaoDoTempo.setOnAction(abrirEntradaCalculosPosicaoVerticalEmFuncaoDoTempo);
+        
         
         
         /*  **********************************************   SETTING DA CENA INICIAL   ********************************************** */
-        stage.setScene(telaPrincipal);
+        stage.setScene(telaPrincipal); 
         stage.show();  
     }
 
