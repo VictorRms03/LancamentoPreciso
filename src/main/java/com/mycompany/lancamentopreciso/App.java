@@ -7,6 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -149,7 +152,46 @@ public class App extends Application {
         blocoGraficos.setArcHeight(10);
         blocoGraficos.setArcWidth(10);
         
-        Group grafico = new Group(blocoGraficos);
+        //Defining the x axis             
+        NumberAxis xAxis = new NumberAxis(0, 60, 5); 
+        xAxis.setLabel("T"); 
+        
+        //Defining the y axis   
+        NumberAxis yAxis = new NumberAxis   (0, 300, 20); 
+        yAxis.setLabel("So"); 
+
+        //Creating the line chart 
+        LineChart linechart = new LineChart(xAxis, yAxis);
+
+
+        //Prepare XYChart.Series objects by setting data 
+        XYChart.Series series = new XYChart.Series(); 
+        series.setName("RESULTADO");
+
+        series.getData().add(new XYChart.Data(5, 15)); 
+        series.getData().add(new XYChart.Data(10, 30)); 
+        series.getData().add(new XYChart.Data(15, 60)); 
+        series.getData().add(new XYChart.Data(20, 90)); 
+        series.getData().add(new XYChart.Data(25, 120)); 
+        series.getData().add(new XYChart.Data(30, 150));
+        series.getData().add(new XYChart.Data(35, 180));
+        series.getData().add(new XYChart.Data(40, 210));
+        series.getData().add(new XYChart.Data(45, 240));
+        series.getData().add(new XYChart.Data(50, 270));
+        series.getData().add(new XYChart.Data(55, 300));
+        series.getData().add(new XYChart.Data(60, 300));
+
+        //Setting the data to Line chart    
+        linechart.getData().add(series);        
+
+        //Creating a Group object  
+        Group root = new Group(linechart);
+        root.setLayoutX(580);
+        root.setLayoutY(80);
+        root.setScaleX(1.2);
+        root.setScaleY(1);
+        
+        Group grafico = new Group(blocoGraficos, root);
         
         // Configuração Texto "Resultados"
         Rectangle blocoTextoResultados = new Rectangle(600, 40);
@@ -369,25 +411,25 @@ public class App extends Application {
         textoEntradaDeDados.setFont(Font.font("", 16));
         
         Text textoExemploFormula = new Text(Calculos.getFormula());
-        textoExemploFormula.setX(185);
+        textoExemploFormula.setX(115);
         textoExemploFormula.setY(270);
         textoExemploFormula.setFill(Color.BLACK);
         textoExemploFormula.setFont(Font.font("", 14));
         
         Text textoEntrada1 = new Text(Calculos.getEntrada1());
-        textoEntrada1.setX(215);
+        textoEntrada1.setX(115);
         textoEntrada1.setY(300);
         textoEntrada1.setFill(Color.BLACK);
         textoEntrada1.setFont(Font.font("", 14));
         
         Text textoEntrada2 = new Text(Calculos.getEntrada2());
-        textoEntrada2.setX(215);
+        textoEntrada2.setX(115);
         textoEntrada2.setY(320);
         textoEntrada2.setFill(Color.BLACK);
         textoEntrada2.setFont(Font.font("", 14));
         
         Text textoEntrada3 = new Text(Calculos.getEntrada3());
-        textoEntrada3.setX(215);
+        textoEntrada3.setX(115);
         textoEntrada3.setY(340);
         textoEntrada3.setFill(Color.BLACK);
         textoEntrada3.setFont(Font.font("", 14));
@@ -428,9 +470,48 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosPosicaoVerticalEmFuncaoDoTempo = (ActionEvent e) -> {
+            textoExemploFormula.setText("S (t) = Vo.t ± g/2.(t²)");
+            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoEntrada2.setText("Gravidade (g) = ");
+            textoEntrada3.setText("Tempo (t) = ");
             stage.setScene(telaEntradaDeDados);
         };
-
+        EventHandler<ActionEvent> abrirEntradaCalculosVelocidadeVerticalEmFuncaoDoTempo = (ActionEvent e) -> {
+            textoExemploFormula.setText("V (t) = Vo ± g.t ");
+            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoEntrada2.setText("Gravidade (g) = ");
+            textoEntrada3.setText("Tempo (t) = ");
+            stage.setScene(telaEntradaDeDados);
+        };
+        EventHandler<ActionEvent> abrirEntradaCalculosTempoDeSubida = (ActionEvent e) -> {
+            textoExemploFormula.setText("T = Vo / g");
+            textoEntrada1.setText("Tempo de Subida (t) = ");
+            textoEntrada2.setText("Velocidade Vertical Inicial (Vo) = ");
+            textoEntrada3.setText("Gravidade (g) = ");
+            stage.setScene(telaEntradaDeDados);
+        };
+        EventHandler<ActionEvent> abrirEntradaCalculosAlturaMaxima = (ActionEvent e) -> {
+            textoExemploFormula.setText("H = Vo² / 2.g");
+            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoEntrada2.setText("Gravidade (g) = ");
+            textoEntrada3.setText(" ");
+            stage.setScene(telaEntradaDeDados);
+        };
+        EventHandler<ActionEvent> abrirEntradaCalculosPosicaoHorizontalEmFuncaoDoTempo = (ActionEvent e) -> {
+            textoExemploFormula.setText("S(t) = Vo.t");
+            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoEntrada2.setText("Tempo (t) = ");
+            textoEntrada3.setText(" ");
+            stage.setScene(telaEntradaDeDados);
+        };
+        EventHandler<ActionEvent> abrirEntradaCalculosAlcanceHorizontal = (ActionEvent e) -> {
+            textoExemploFormula.setText("A = Vo². sen 2Θ / g");
+             textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoEntrada2.setText("Ângulo realizado pelo objeto (sen Θ) = ");
+            textoEntrada3.setText("Gravidade (g) =  ");
+            stage.setScene(telaEntradaDeDados);
+        };
+        
         
         
         /*  **********************************************   ATRIBUIÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
@@ -441,6 +522,16 @@ public class App extends Application {
         botaoCancelar.setOnAction(abrirTelaPrincipal);
         
         botaoPosicaoVerticalEmFuncaoDoTempo.setOnAction(abrirEntradaCalculosPosicaoVerticalEmFuncaoDoTempo);
+        
+        botaoVelocidadeVerticalEmFuncaoDoTempo.setOnAction(abrirEntradaCalculosVelocidadeVerticalEmFuncaoDoTempo);
+        
+        botaoTempoDeSubida.setOnAction(abrirEntradaCalculosTempoDeSubida);
+        
+        botaoAlturaMaxima.setOnAction(abrirEntradaCalculosAlturaMaxima);
+        
+        botaoPosicaoHorizontalEmFuncaoDoTempo.setOnAction(abrirEntradaCalculosPosicaoHorizontalEmFuncaoDoTempo);
+        
+        botaoAlcanceHorizontal.setOnAction(abrirEntradaCalculosAlcanceHorizontal);
         
         
         
