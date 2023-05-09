@@ -2,17 +2,41 @@ package com.mycompany.lancamentopreciso;
 
 public final class Calculos {
     
-    private static String entrada1 = "En1";
-    private static String entrada2 = "En2";
-    private static String entrada3 = "En3";
-    private static String formula = "Formula";
+    private double entrada1;
+    private double entrada2;
+    private double entrada3;
+    private double resultado;
+    private int qualCalculo = 1;
+    private String ResultadoString = "RESULTADO";
+    private String explicacao;
     
     public Calculos(){}
    
+    public double calcular (){
+        switch (qualCalculo) {
+            case 1:
+                return PosicaoVerticalTempo(entrada1, entrada3, entrada2);
+            case 2:
+                return VelocidadeVerticalTempo(entrada1, entrada3, entrada2);
+            case 3:
+                return TempoSubida(entrada1, entrada2);
+            case 4:
+                return AlturaMaxima(entrada1, entrada2);
+            case 5:
+                return PosicaoHorizontalTempo(entrada1, entrada2);
+            case 6:
+                return AlcanceHorizontal(entrada1, entrada2, entrada3);
+            default:
+                break;
+        }
+        return 0.361;
+    }
     
     public double PosicaoVerticalTempo(double velocidadeInicial, double tempo, double gravidade){
         
         double x;
+        
+        //Calculando Resultado
         x = (velocidadeInicial * tempo) + (gravidade/2) * (tempo*tempo);
         return x;
     }
@@ -38,7 +62,7 @@ public final class Calculos {
         return x;
     }
     
-    public double PosicaoHorizontalTempo(double velocidadeInicial, double tempo, double gravidade){
+    public double PosicaoHorizontalTempo(double velocidadeInicial, double tempo){
         
         double x;
         x = velocidadeInicial * tempo;
@@ -52,35 +76,67 @@ public final class Calculos {
         return x;
     }
     
+    public void setQualCalculo(int x){
+        this.qualCalculo = x;
+    }
+    
     public void setEntrada1(String x){
-        entrada1 = x;
+        double entrada = Double.parseDouble(x);
+        this.entrada1 = entrada;
     }
     
     public void setEntrada2(String x){
-        entrada2 = x;
+        double entrada = Double.parseDouble(x);
+        this.entrada2 = entrada;
     }
     
     public void setEntrada3(String x){
-        entrada3 = x;
+        double entrada = Double.parseDouble(x);
+        this.entrada3 = entrada;
     }
     
-    public void setFormula(String x){
-        formula = x;
+    public void setResultado(double x){
+        this.resultado = x;
     }
     
-    public static String getEntrada1(){
+    public double getEntrada1(){
         return entrada1;
     }
     
-    public static String getEntrada2(){
+    public double getEntrada2(){
         return entrada2;
     }
     
-    public static String getEntrada3(){
+    public double getEntrada3(){
         return entrada3;
     }
     
-    public static String getFormula(){
-        return formula;
+    public double getResultado(){
+        return resultado;
+    }
+    
+    public String getResultadoString(){
+        ResultadoString = Double.toString(resultado);
+        return ResultadoString;
+    }
+    
+    public String getExplicacao(){
+        switch (qualCalculo) {
+            case 1:
+                return ""; //explicacao PosicaoVerticalTempo
+            case 2:
+                return ""; //explicacao VelocidadeVertical Tempo
+            case 3:
+                return ""; //explicacao TempoSubida
+            case 4:
+                return ""; //explicacao AlturaMaxima;
+            case 5:
+                return ""; //explicacao PosicaoHorizontalTempo;
+            case 6:
+                return ""; //explicacao AlcanceHorizontal;
+            default:
+                break;
+        }
+        return "";
     }
 }
