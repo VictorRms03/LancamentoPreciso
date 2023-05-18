@@ -143,10 +143,18 @@ public class App extends Application {
         botaoAlcanceHorizontal.setMinHeight(40);
         botaoAlcanceHorizontal.setStyle("-fx-base: #ffffff; ");
         
+        // Configuração Botão "Gráficos do Alcance"
+        Button botaoGrafico = new Button("Graficos de Alcance Maximo");
+        botaoGrafico.setLayoutX(290);
+        botaoGrafico.setLayoutY(460);
+        botaoGrafico.setMinWidth(180);
+        botaoGrafico.setMinHeight(40);
+        botaoGrafico.setStyle("-fx-base: #ffffff; ");
+        
         // Grupo para aba de Seleção de Calculos
         Group abaSeleçãoDeCalculos = new Group(abaOQueDesejaCalcular, abaMovimentoVertical, abaMovimentoHorizontal, 
                 botaoPosicaoVerticalEmFuncaoDoTempo, botaoVelocidadeVerticalEmFuncaoDoTempo, botaoTempoDeSubida, 
-                botaoAlturaMaxima, botaoPosicaoHorizontalEmFuncaoDoTempo, botaoAlcanceHorizontal);
+                botaoAlturaMaxima, botaoPosicaoHorizontalEmFuncaoDoTempo, botaoAlcanceHorizontal, botaoGrafico);
             
         // Configuração da Area de Graficos
         Rectangle blocoGraficos = new Rectangle(600, 300);
@@ -228,7 +236,7 @@ public class App extends Application {
         
         Text textoExplicacao = new Text("explicacão"); // fazer if no botão para mudar isso
         textoExplicacao.setX(835);
-        textoExplicacao.setY(505);
+        textoExplicacao.setY(495);
         textoExplicacao.setFill(Color.BLACK);
         textoExplicacao.setFont(Font.font("", 14));
         
@@ -280,7 +288,7 @@ public class App extends Application {
         textoEntrada1.setFont(Font.font("", 14));
         
         TextField Entrada1 = new TextField();
-        Entrada1.setLayoutX(315);
+        Entrada1.setLayoutX(360);
         Entrada1.setLayoutY(285);
         Entrada1.setMinSize(30, 20);
         Entrada1.setMaxSize(30, 20);
@@ -292,7 +300,7 @@ public class App extends Application {
         textoEntrada2.setFont(Font.font("", 14));
         
         TextField Entrada2 = new TextField();
-        Entrada2.setLayoutX(315);
+        Entrada2.setLayoutX(360);
         Entrada2.setLayoutY(310);
         Entrada2.setMinSize(30, 20);
         Entrada2.setMaxSize(30, 20);
@@ -304,7 +312,7 @@ public class App extends Application {
         textoEntrada3.setFont(Font.font("", 14));
         
         TextField Entrada3 = new TextField();
-        Entrada3.setLayoutX(315);
+        Entrada3.setLayoutX(360);
         Entrada3.setLayoutY(335);
         Entrada3.setMinSize(30, 20);
         Entrada3.setMaxSize(30, 20);
@@ -314,7 +322,7 @@ public class App extends Application {
         
         // Configuração Botão "Efetuar Calculo"
         Button botaoEfetuarCalculo = new Button("Efetuar Calculo");
-        botaoEfetuarCalculo.setLayoutX(50);
+        botaoEfetuarCalculo.setLayoutX(50); 
         botaoEfetuarCalculo.setLayoutY(450);
         botaoEfetuarCalculo.setMinSize(150, 40);
         
@@ -331,6 +339,87 @@ public class App extends Application {
         var telaEntradaDeDados = new Scene(grupoTelaEntradaDeDados, 500, 600);
         
         
+        /*  **********************************************   TELA ENTRADA DE DADOS PARA O GRAFICO   **********************************************  */
+        
+        // Configura Visualização da Logo
+        ImageView logoViewTelaEntradaDeDadosGrafico = new ImageView(logo);
+        logoViewTelaEntradaDeDadosGrafico.setX(100);
+        logoViewTelaEntradaDeDadosGrafico.setY(-40);
+        logoViewTelaEntradaDeDadosGrafico.setFitHeight(300);
+        logoViewTelaEntradaDeDadosGrafico.setFitWidth(300);
+        
+        //Configuracao aba: Entrada de Dados
+        Rectangle blocoEntradaDeDadosGrafico = new Rectangle(400, 200);
+        blocoEntradaDeDadosGrafico.setX(50);
+        blocoEntradaDeDadosGrafico.setY(200);
+        blocoEntradaDeDadosGrafico.setArcHeight(10);
+        blocoEntradaDeDadosGrafico.setArcWidth(10);
+        blocoEntradaDeDadosGrafico.setFill(Color.WHITE);
+        blocoEntradaDeDadosGrafico.setStroke(Color.BLACK);
+        
+        Text textoEntradaDeDadosGrafico = new Text("ENTRADA DE DADOS");
+        textoEntradaDeDadosGrafico.setX(185);
+        textoEntradaDeDadosGrafico.setY(240);
+        textoEntradaDeDadosGrafico.setFill(Color.BLACK);
+        textoEntradaDeDadosGrafico.setFont(Font.font("", 16));
+        
+         Text textoEntradaGrafico1 = new Text("Entrada 1");
+        textoEntradaGrafico1.setX(115);
+        textoEntradaGrafico1.setY(300);
+        textoEntradaGrafico1.setFill(Color.BLACK);
+        textoEntradaGrafico1.setFont(Font.font("", 14));
+        
+        TextField EntradaGrafico1 = new TextField();
+        EntradaGrafico1.setLayoutX(360);
+        EntradaGrafico1.setLayoutY(285);
+        EntradaGrafico1.setMinSize(30, 20);
+        EntradaGrafico1.setMaxSize(30, 20);
+        
+        Text textoEntradaGrafico2 = new Text("Entrada 2");
+        textoEntradaGrafico2.setX(115);
+        textoEntradaGrafico2.setY(320);
+        textoEntradaGrafico2.setFill(Color.BLACK);
+        textoEntradaGrafico2.setFont(Font.font("", 14));
+        
+        TextField EntradaGrafico2 = new TextField();
+        EntradaGrafico2.setLayoutX(360);
+        EntradaGrafico2.setLayoutY(310);
+        EntradaGrafico2.setMinSize(30, 20);
+        EntradaGrafico2.setMaxSize(30, 20);
+        
+        Text textoEntradaGrafico3 = new Text("Entrada 3");
+        textoEntradaGrafico3.setX(115);
+        textoEntradaGrafico3.setY(340);
+        textoEntradaGrafico3.setFill(Color.BLACK);
+        textoEntradaGrafico3.setFont(Font.font("", 14));
+        
+        TextField EntradaGrafico3 = new TextField();
+        EntradaGrafico3.setLayoutX(360);
+        EntradaGrafico3.setLayoutY(335);
+        EntradaGrafico3.setMinSize(30, 20);
+        EntradaGrafico3.setMaxSize(30, 20);
+        
+        Group abaEntradaDeDadosGrafico = new Group(blocoEntradaDeDadosGrafico, textoEntradaDeDadosGrafico, textoEntradaGrafico1, textoEntradaGrafico2, textoEntradaGrafico3,
+                EntradaGrafico1, EntradaGrafico2, EntradaGrafico3);
+        
+        
+        // Configuração Botão "Efetuar Calculo"
+        Button botaoEfetuarCalculoGrafico = new Button("Efetuar Calculo");
+        botaoEfetuarCalculoGrafico.setLayoutX(50); 
+        botaoEfetuarCalculoGrafico.setLayoutY(450);
+        botaoEfetuarCalculoGrafico.setMinSize(150, 40);
+        
+        // Configuração Botão "Cancelar"
+        Button botaoCancelarGrafico = new Button("Cancelar");
+        botaoCancelarGrafico.setLayoutX(300);
+        botaoCancelarGrafico.setLayoutY(450);
+        botaoCancelarGrafico.setMinSize(150, 40);
+        
+         // Grupo Tela "EntradaDeDados"
+        Group grupoTelaEntradaDeDadosGrafico = new Group(logoViewTelaEntradaDeDadosGrafico, abaEntradaDeDadosGrafico, botaoEfetuarCalculoGrafico, botaoCancelarGrafico, textoEntradaDeDadosGrafico);
+        
+         // Configuração da Cena
+        var telaEntradaDeDadosGrafico = new Scene(grupoTelaEntradaDeDadosGrafico, 500, 600);
         
         /*  **********************************************   CONFIGURAÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
 
@@ -340,8 +429,8 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosPosicaoVerticalEmFuncaoDoTempo = (ActionEvent e) -> {
-            textoExemploFormula.setText("S (t) = Vo.t ± g/2.(t²)");
-            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoExemploFormula.setText("Sy(t) = Voy.t ± g/2.(t²)");
+            textoEntrada1.setText("Velocidade Inicial (Voy) = ");
             textoEntrada2.setText("Gravidade (g) = ");
             textoEntrada3.setText("Tempo (t) = ");
             calculo.setQualCalculo(1);
@@ -349,8 +438,8 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosVelocidadeVerticalEmFuncaoDoTempo = (ActionEvent e) -> {
-            textoExemploFormula.setText("V (t) = Vo ± g.t ");
-            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoExemploFormula.setText("Vy(t) = Voy ± g.t ");
+            textoEntrada1.setText("Velocidade Inicial (Voy) = ");
             textoEntrada2.setText("Gravidade (g) = ");
             textoEntrada3.setText("Tempo (t) = ");
             calculo.setQualCalculo(2);
@@ -358,8 +447,8 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosTempoDeSubida = (ActionEvent e) -> {
-            textoExemploFormula.setText("T = Vo / g");
-            textoEntrada1.setText("Velocidade Vertical Inicial (Vo) = ");
+            textoExemploFormula.setText("T = Voy / g");
+            textoEntrada1.setText("Velocidade Vertical Inicial (Voy) = ");
             textoEntrada2.setText("Gravidade (g) = ");
             textoEntrada3.setText(" ");
             calculo.setQualCalculo(3);
@@ -367,8 +456,8 @@ public class App extends Application {
         };
        
         EventHandler<ActionEvent> abrirEntradaCalculosAlturaMaxima = (ActionEvent e) -> {
-            textoExemploFormula.setText("H = Vo² / 2.g");
-            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoExemploFormula.setText("H = Vo²y / 2.g");
+            textoEntrada1.setText("Velocidade Inicial (Voy) = ");
             textoEntrada2.setText("Gravidade (g) = ");
             textoEntrada3.setText(" ");
             calculo.setQualCalculo(4);
@@ -376,8 +465,8 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosPosicaoHorizontalEmFuncaoDoTempo = (ActionEvent e) -> {
-            textoExemploFormula.setText("S(t) = Vo.t");
-            textoEntrada1.setText("Velocidade Inicial (Vo) = ");
+            textoExemploFormula.setText("Sx(t) = Vox.t");
+            textoEntrada1.setText("Velocidade Inicial (Vox) = ");
             textoEntrada2.setText("Tempo (t) = ");
             textoEntrada3.setText(" ");
             calculo.setQualCalculo(5);
@@ -385,10 +474,10 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosAlcanceHorizontal = (ActionEvent e) -> {
-            textoExemploFormula.setText("A = Vo². sen 2Θ / g");
+            textoExemploFormula.setText("A = ∆Sx = Vo.cosΘ.∆t total");
             textoEntrada1.setText("Velocidade Inicial (Vo) = ");
-            textoEntrada2.setText("Ângulo realizado pelo objeto (sen Θ) = ");
-            textoEntrada3.setText("Gravidade (g) =  ");
+            textoEntrada2.setText("Ângulo realizado pelo objeto (cos Θ) = ");
+            textoEntrada3.setText("Tempo total(∆t total) =  ");
             calculo.setQualCalculo(6);
             stage.setScene(telaEntradaDeDados);
         };
@@ -403,11 +492,20 @@ public class App extends Application {
             stage.setScene(telaPrincipal);
         };
         
+        EventHandler<ActionEvent> abrirEntradaCalculosGrafico = (ActionEvent e) -> {
+            textoEntradaGrafico1.setText("Tempo de Subida = ");
+            textoEntradaGrafico2.setText("∆T total = ");
+            textoEntradaGrafico3.setText("Alcance = ∆Sx =  ");
+            stage.setScene(telaEntradaDeDadosGrafico);
+        };
+        
         
         
         /*  **********************************************   ATRIBUIÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
         
         botaoCancelar.setOnAction(abrirTelaPrincipal);
+        
+        botaoCancelarGrafico.setOnAction(abrirTelaPrincipal);
         
         botaoPosicaoVerticalEmFuncaoDoTempo.setOnAction(abrirEntradaCalculosPosicaoVerticalEmFuncaoDoTempo);
         
@@ -422,6 +520,10 @@ public class App extends Application {
         botaoAlcanceHorizontal.setOnAction(abrirEntradaCalculosAlcanceHorizontal);
         
         botaoEfetuarCalculo.setOnAction(efetuarCalculo);
+        
+        botaoGrafico.setOnAction(abrirEntradaCalculosGrafico);
+        
+      
         
         
         

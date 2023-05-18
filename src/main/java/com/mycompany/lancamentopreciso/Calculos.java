@@ -123,17 +123,17 @@ public final class Calculos {
     public String getExplicacao(){
         switch (qualCalculo) {
             case 1:
-                return ""; //explicacao PosicaoVerticalTempo
+                return "A posição vertical em função do tempo é a \nposição vertical em determinado instante \napós o lançamento."; //explicacao PosicaoVerticalTempo
             case 2:
-                return ""; //explicacao VelocidadeVertical Tempo
+                return "Dois valores são importantes no movimento \nvertical: a altura máxima o tempo até alcançar \no ponto mais alto da trajetória."; //explicacao VelocidadeVertical Tempo
             case 3:
-                return ""; //explicacao TempoSubida
+                return "O tempo de subida é igual ao tempo de \ndescida, logo, o tempo total é duas vezes o \ntempo de subida."; //explicacao TempoSubida
             case 4:
-                return ""; //explicacao AlturaMaxima;
+                return "A altura máxima do lançamento oblíquo pode \nser obtida utilizando as fórmulas do movimento \nuniformemente variado, já que ele está \nrelacionado com o movimento vertical."; //explicacao AlturaMaxima;
             case 5:
-                return ""; //explicacao PosicaoHorizontalTempo;
+                return "No movimento horizontal de um lançamento \noblíquo, temos uma relação do espaço com o \ntempo utilizando a velocidade no eixo x (vx) \nvai ser sempre constante."; //explicacao PosicaoHorizontalTempo;
             case 6:
-                return ""; //explicacao AlcanceHorizontal;
+                return "O alcance horizontal é a distância entre \nos pontos de partida e chegada do objeto \nlançado obliquamente."; //explicacao AlcanceHorizontal;
             default:
                 break;
         }
