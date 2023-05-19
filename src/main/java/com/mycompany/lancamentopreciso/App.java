@@ -268,12 +268,95 @@ public class App extends Application {
         
         /*  **********************************************   TELA RESULTADOS   ********************************************** */  
         
-        Group grupoTelaResultados = new Group();
+        // Configuração da Area de Graficos
+        Rectangle blocoGrafico = new Rectangle(600, 300);
+        blocoGrafico.setX(500);
+        blocoGrafico.setY(40);
+        blocoGrafico.setHeight(430);
+        blocoGrafico.setWidth(650);
+        blocoGrafico.setFill(Color.WHITE);
+        blocoGrafico.setStroke(Color.BLACK);
+        blocoGrafico.setArcHeight(10);
+        blocoGrafico.setArcWidth(10);
+        
+        //Defining the x axis             
+        NumberAxis xAxis = new NumberAxis(0, 60, 5); 
+        xAxis.setLabel("T"); 
+        
+        //Defining the y axis   
+        NumberAxis yAxis = new NumberAxis   (0, 300, 20); 
+        yAxis.setLabel("So"); 
+
+        //Creating the line chart 
+        LineChart linechart = new LineChart(xAxis, yAxis);
+
+
+        //Prepare XYChart.Series objects by setting data 
+        XYChart.Series series = new XYChart.Series(); 
+        series.setName("RESULTADO");
+
+        series.getData().add(new XYChart.Data(0, 0)); 
+        series.getData().add(new XYChart.Data(10, 30)); 
+        series.getData().add(new XYChart.Data(15, 60)); 
+        series.getData().add(new XYChart.Data(20, 90)); 
+        series.getData().add(new XYChart.Data(25, 120)); 
+        series.getData().add(new XYChart.Data(30, 150));
+        series.getData().add(new XYChart.Data(35, 180));
+        series.getData().add(new XYChart.Data(40, 210));
+        series.getData().add(new XYChart.Data(45, 240));
+        series.getData().add(new XYChart.Data(50, 270));
+        series.getData().add(new XYChart.Data(55, 300));
+        series.getData().add(new XYChart.Data(60, 300));
+
+        //Setting the data to Line chart    
+        linechart.getData().add(series);        
+
+        //Creating a Group object  
+        Group root = new Group(linechart);
+        root.setLayoutX(570);
+        root.setLayoutY(45);
+        root.setScaleX(1.2);
+        root.setScaleY(1);
+        
+        Group grafico = new Group(blocoGrafico, root);
+        
+        
+        // Configuração Texto "Resultados"
+        Rectangle blocoTextoResultados = new Rectangle(300, 40);
+        blocoTextoResultados.setX(500);
+        blocoTextoResultados.setY(480);
+        blocoTextoResultados.setFill(Color.WHITE);
+        blocoTextoResultados.setStroke(Color.BLACK);
+        blocoTextoResultados.setArcHeight(10);
+        blocoTextoResultados.setArcWidth(10);
+        
+        Text textoResultados = new Text("*STRING RESULTADO*");
+        textoResultados.setX(525);
+        textoResultados.setY(505);
+        textoResultados.setFill(Color.BLACK);
+        textoResultados.setFont(Font.font("", 14));
+        
+        Group resultados = new Group(blocoTextoResultados, textoResultados);
+        
+        //Configuração Texto "Explicação"
+        Rectangle blocoTextoExplicacao = new Rectangle(340, 80);
+        blocoTextoExplicacao.setX(810);
+        blocoTextoExplicacao.setY(480);
+        blocoTextoExplicacao.setFill(Color.WHITE);
+        blocoTextoExplicacao.setStroke(Color.BLACK);
+        blocoTextoExplicacao.setArcHeight(10);
+        blocoTextoExplicacao.setArcWidth(10);
+        
+        Text textoExplicacao = new Text("explicacão"); // fazer if no botão para mudar isso
+        textoExplicacao.setX(835);
+        textoExplicacao.setY(495);
+        textoExplicacao.setFill(Color.BLACK);
+        textoExplicacao.setFont(Font.font("", 14));
+        
+        Group explicacao = new Group(blocoTextoExplicacao, textoExplicacao);
+        
+        Group grupoTelaResultados = new Group(grafico, resultados, explicacao);
         var telaResultados = new Scene (grupoTelaResultados, 1200, 600);
-        
-        
-        
-        
         
         
         /*  **********************************************   CONFIGURAÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
@@ -342,11 +425,11 @@ public class App extends Application {
             calculo.setVelocidadeInicial(velocidadeInicial.getText());
             calculo.setAngulo(angulo.getText());
             calculo.setResultado(calculo.calcular());
-            //textoResultados.setText("RESULTADO = " + calculo.getResultadoString());
+            textoResultados.setText(calculo.getResultadoString());
             //textoExplicacao.setText(calculo.getExplicacao());
             stage.setScene(telaResultados);
         };
-
+        
         
         /*  **********************************************   ATRIBUIÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
         
@@ -378,94 +461,3 @@ public class App extends Application {
         launch();
     }
 }
-
-
-
-/*    
-        // Configuração da Area de Graficos
-        Rectangle blocoGraficos = new Rectangle(600, 300);
-        blocoGraficos.setX(500);
-        blocoGraficos.setY(40);
-        blocoGraficos.setHeight(430);
-        blocoGraficos.setWidth(650);
-        blocoGraficos.setFill(Color.WHITE);
-        blocoGraficos.setStroke(Color.BLACK);
-        blocoGraficos.setArcHeight(10);
-        blocoGraficos.setArcWidth(10);
-        
-        //Defining the x axis             
-        NumberAxis xAxis = new NumberAxis(0, 60, 5); 
-        xAxis.setLabel("T"); 
-        
-        //Defining the y axis   
-        NumberAxis yAxis = new NumberAxis   (0, 300, 20); 
-        yAxis.setLabel("So"); 
-
-        //Creating the line chart 
-        LineChart linechart = new LineChart(xAxis, yAxis);
-
-
-        //Prepare XYChart.Series objects by setting data 
-        XYChart.Series series = new XYChart.Series(); 
-        series.setName("RESULTADO");
-
-        series.getData().add(new XYChart.Data(5, 15)); 
-        series.getData().add(new XYChart.Data(10, 30)); 
-        series.getData().add(new XYChart.Data(15, 60)); 
-        series.getData().add(new XYChart.Data(20, 90)); 
-        series.getData().add(new XYChart.Data(25, 120)); 
-        series.getData().add(new XYChart.Data(30, 150));
-        series.getData().add(new XYChart.Data(35, 180));
-        series.getData().add(new XYChart.Data(40, 210));
-        series.getData().add(new XYChart.Data(45, 240));
-        series.getData().add(new XYChart.Data(50, 270));
-        series.getData().add(new XYChart.Data(55, 300));
-        series.getData().add(new XYChart.Data(60, 300));
-
-        //Setting the data to Line chart    
-        linechart.getData().add(series);        
-
-        //Creating a Group object  
-        Group root = new Group(linechart);
-        root.setLayoutX(570);
-        root.setLayoutY(45);
-        root.setScaleX(1.2);
-        root.setScaleY(1);
-        
-        Group grafico = new Group(blocoGraficos, root);
-        
-        
-        // Configuração Texto "Resultados"
-        Rectangle blocoTextoResultados = new Rectangle(300, 40);
-        blocoTextoResultados.setX(500);
-        blocoTextoResultados.setY(480);
-        blocoTextoResultados.setFill(Color.WHITE);
-        blocoTextoResultados.setStroke(Color.BLACK);
-        blocoTextoResultados.setArcHeight(10);
-        blocoTextoResultados.setArcWidth(10);
-        
-        Text textoResultados = new Text("*STRING RESULTADO*");
-        textoResultados.setX(525);
-        textoResultados.setY(505);
-        textoResultados.setFill(Color.BLACK);
-        textoResultados.setFont(Font.font("", 14));
-        
-        Group resultados = new Group(blocoTextoResultados, textoResultados);
-        
-        //Configuração Texto "Explicação"
-        Rectangle blocoTextoExplicacao = new Rectangle(340, 80);
-        blocoTextoExplicacao.setX(810);
-        blocoTextoExplicacao.setY(480);
-        blocoTextoExplicacao.setFill(Color.WHITE);
-        blocoTextoExplicacao.setStroke(Color.BLACK);
-        blocoTextoExplicacao.setArcHeight(10);
-        blocoTextoExplicacao.setArcWidth(10);
-        
-        Text textoExplicacao = new Text("explicacão"); // fazer if no botão para mudar isso
-        textoExplicacao.setX(835);
-        textoExplicacao.setY(495);
-        textoExplicacao.setFill(Color.BLACK);
-        textoExplicacao.setFont(Font.font("", 14));
-        
-        Group explicacao = new Group(blocoTextoExplicacao, textoExplicacao);
-        */

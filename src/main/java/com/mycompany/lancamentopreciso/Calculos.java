@@ -77,7 +77,8 @@ public final class Calculos {
     }
     
     public void setAngulo(String x){
-        this.angulo = Double.parseDouble(x);
+        double anguloGraus = Double.parseDouble(x);
+        this.angulo = Math.toRadians(anguloGraus);
     }
     
     public void setResultado(double x){
@@ -103,8 +104,21 @@ public final class Calculos {
     }
     
     public String getResultadoString(){
-        return Double.toString(resultado);
+        switch (qualCalculo) {
+            case 1:
+                return "ts = " + Double.toString(resultado);
+            case 2:
+                return "t_total = " + Double.toString(resultado);
+            case 3:
+                return "Hmax = " + Double.toString(resultado);
+            case 4:
+                return "ΔSx = " + Double.toString(resultado);
+            default:
+                break;
+        }
+        return "erro";
     }
+    
     
     public String getExplicacao(){
         switch (qualCalculo) {
@@ -121,4 +135,8 @@ public final class Calculos {
         }
         return "";
     }
+    
+    /* **************************************** GRAFICO ************************************ */
+    
+    
 }
