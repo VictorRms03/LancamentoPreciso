@@ -87,6 +87,9 @@ public final class Calculos {
     
     /* ***************** Gets ****************** */
     
+    public double getQualEixo(){
+        return qualEixo;
+    }
     public double getVelocidadeInicial(){
         return velocidadeInicial;
     }

@@ -208,7 +208,7 @@ public class App extends Application {
         textoEntradaDeDados.setFill(Color.BLACK);
         textoEntradaDeDados.setFont(Font.font("", 16));
         
-        Text textoExemploFormula = new Text("Formula");
+        Text textoExemploFormula = new Text("");
         textoExemploFormula.setX(115);
         textoExemploFormula.setY(270);
         textoExemploFormula.setFill(Color.BLACK);
@@ -223,8 +223,8 @@ public class App extends Application {
         TextField velocidadeInicial = new TextField();
         velocidadeInicial.setLayoutX(360);
         velocidadeInicial.setLayoutY(295);
-        velocidadeInicial.setMinSize(30, 20);
-        velocidadeInicial.setMaxSize(30, 20);
+        velocidadeInicial.setMinSize(40, 20);
+        velocidadeInicial.setMaxSize(40, 20);
         
         Text textoAngulo = new Text("Angulo (Θ) =");
         textoAngulo.setX(115);
@@ -235,11 +235,17 @@ public class App extends Application {
         TextField angulo = new TextField();
         angulo.setLayoutX(360);
         angulo.setLayoutY(335);
-        angulo.setMinSize(30, 20);
-        angulo.setMaxSize(30, 20);
+        angulo.setMinSize(40, 20);
+        angulo.setMaxSize(40, 20);
         
         Group abaEntradaDasContas= new Group(blocoEntradaDeDados, textoEntradaDeDados, textoExemploFormula, textoVelocidadeInicial,
                 velocidadeInicial, textoAngulo, angulo);
+        
+        Text textoGravidade10 = new Text("ATENÇÃO: Gravidade(g) = 10 para todos os resultados");
+        textoGravidade10.setX(80);
+        textoGravidade10.setY(550);
+        textoGravidade10.setFill(Color.BLACK);
+        textoGravidade10.setFont(Font.font("", 14));
         
         // Configuração Botão "Efetuar Calculo"
         Button botaoEfetuarCalculo = new Button("Efetuar Calculo");
@@ -254,13 +260,13 @@ public class App extends Application {
         botaoCancelar.setMinSize(150, 40);
         
         // Grupo Tela "EntradaDeDados"
-        Group grupoTelaEntradaDeDados = new Group(logoViewTelaEntradaDeDados, abaEntradaDasContas, botaoEfetuarCalculo, botaoCancelar);
+        Group grupoTelaEntradaDeDados = new Group(logoViewTelaEntradaDeDados, abaEntradaDasContas, botaoEfetuarCalculo, botaoCancelar, textoGravidade10);
         
         // Configuração da Cena
         var telaEntradaDeDados = new Scene(grupoTelaEntradaDeDados, 500, 600);
         
         
-        /*  **********************************************   TELA ENTRADAS   ********************************************** */  
+        /*  **********************************************   TELA RESULTADOS   ********************************************** */  
         
         Group grupoTelaResultados = new Group();
         var telaResultados = new Scene (grupoTelaResultados, 1200, 600);
@@ -293,25 +299,41 @@ public class App extends Application {
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosTempoDeSubida = (ActionEvent e) -> {
-            textoExemploFormula.setText("????????????");
+            if(calculo.getQualEixo() == 1){
+                textoExemploFormula.setText("ts = (Vo . senΘ) / g");
+            } else if (calculo.getQualEixo() == 2){
+                textoExemploFormula.setText("ts = (Vo . cosΘ) / g");
+            }
             calculo.setQualCalculo(1);
             stage.setScene(telaEntradaDeDados);
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosTempoTotal = (ActionEvent e) -> {
-            textoExemploFormula.setText("????????????");
+            if(calculo.getQualEixo() == 1){
+                textoExemploFormula.setText("t_total = 2 . (Vo . senΘ) / g");
+            } else if (calculo.getQualEixo() == 2){
+                textoExemploFormula.setText("t_total = 2 . (Vo . cosΘ) / g");
+            }
             calculo.setQualCalculo(2);
             stage.setScene(telaEntradaDeDados);
         };
        
         EventHandler<ActionEvent> abrirEntradaCalculosAlturaMaxima = (ActionEvent e) -> {
-            textoExemploFormula.setText("????????????");
+            if(calculo.getQualEixo() == 1){
+                textoExemploFormula.setText("Hmax = (Vo . senΘ)² / 2g");
+            } else if (calculo.getQualEixo() == 2){
+                textoExemploFormula.setText("Hmax = (Vo . cosΘ)² / 2g");
+            }
             calculo.setQualCalculo(3);
             stage.setScene(telaEntradaDeDados);
         };
         
         EventHandler<ActionEvent> abrirEntradaCalculosAlcanceHorizontal = (ActionEvent e) -> {
-            textoExemploFormula.setText("????????????");
+            if(calculo.getQualEixo() == 1){
+                textoExemploFormula.setText("ΔSx = Vo . cosΘ . Δt_total");
+            } else if (calculo.getQualEixo() == 2){
+                textoExemploFormula.setText("ΔSx = Vo . senΘ . Δt_total");
+            }
             calculo.setQualCalculo(4);
             stage.setScene(telaEntradaDeDados);
         };
