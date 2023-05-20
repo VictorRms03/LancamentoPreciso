@@ -1,5 +1,7 @@
 package com.mycompany.lancamentopreciso;
 
+import java.util.ArrayList;
+
 public final class Calculos {
     
     private double velocidadeInicial;
@@ -7,6 +9,8 @@ public final class Calculos {
     private double resultado;
     private int qualEixo = 1;
     private int qualCalculo = 1;
+    private ArrayList listaPosicaoX = new ArrayList();
+    private ArrayList listaPosicaoY = new ArrayList();
     
     // Construtor Padrão
     public Calculos(){}
@@ -15,13 +19,13 @@ public final class Calculos {
     public double calcular (){
         switch (qualCalculo) {
             case 1:
-                return tempoSubida(velocidadeInicial, angulo);
+                return tempoSubida();
             case 2:
-                return tempoTotal(velocidadeInicial, angulo);
+                return tempoTotal();
             case 3:
-                return alturaMaxima(velocidadeInicial, angulo);
+                return alturaMaxima();
             case 4:
-                return alcanceHorizontal(velocidadeInicial, angulo);
+                return alcanceHorizontal();
             default:
                 break;
         }
@@ -30,7 +34,7 @@ public final class Calculos {
     
     
     /* ********************** FORMULAS ******************** */
-    public double tempoSubida(double velocidadeInicial, double angulo){
+    public double tempoSubida(){
         if(qualEixo == 1){
             return (velocidadeInicial * Math.sin(angulo)) / 10.0;
         } else if (qualEixo == 2){
@@ -39,11 +43,11 @@ public final class Calculos {
         return -9999999;
     }
     
-    public double tempoTotal(double velocidadeInicial, double angulo){
-        return tempoSubida(velocidadeInicial, angulo) * 2;
+    public double tempoTotal(){
+        return (tempoSubida() * 2);
     }
     
-    public double alturaMaxima(double velocidadeInicial, double angulo){
+    public double alturaMaxima(){
         if(qualEixo == 1){
             return Math.pow(velocidadeInicial * Math.sin(angulo), 2) / 20.0;
         } else if (qualEixo == 2){
@@ -52,11 +56,11 @@ public final class Calculos {
         return -999999999;
     }
     
-    public double alcanceHorizontal(double velocidadeInicial, double angulo){
+    public double alcanceHorizontal(){
         if(qualEixo == 1){
-            return velocidadeInicial * Math.cos(angulo) * tempoTotal(velocidadeInicial, angulo);
+            return velocidadeInicial * Math.cos(angulo) * tempoTotal();
         } else if (qualEixo == 2){
-            return velocidadeInicial * Math.sin(angulo) * tempoTotal(velocidadeInicial, angulo);
+            return velocidadeInicial * Math.sin(angulo) * tempoTotal();
         }
         return -999999999;
     }
@@ -125,7 +129,7 @@ public final class Calculos {
             case 1:
                 return "O tempo de subida é igual ao tempo de \ndescida, logo, o tempo total é duas vezes o \ntempo de subida."; //explicacao TempoSubida
             case 2:
-                return "Dois valores são importantes no movimento \nvertical: a altura máxima o tempo até alcançar \no ponto mais alto da trajetória."; //explicacao TempoTotal
+                return "???????????????"; //explicacao TempoTotal
             case 3:
                 return "A altura máxima do lançamento oblíquo pode \nser obtida utilizando as fórmulas do movimento \nuniformemente variado, já que ele está \nrelacionado com o movimento vertical."; //explicacao AlturaMaxima;
             case 4:

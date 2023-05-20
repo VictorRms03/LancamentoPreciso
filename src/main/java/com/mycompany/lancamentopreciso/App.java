@@ -426,7 +426,7 @@ public class App extends Application {
             calculo.setAngulo(angulo.getText());
             calculo.setResultado(calculo.calcular());
             textoResultados.setText(calculo.getResultadoString());
-            //textoExplicacao.setText(calculo.getExplicacao());
+            textoExplicacao.setText(calculo.getExplicacao());
             stage.setScene(telaResultados);
         };
         
