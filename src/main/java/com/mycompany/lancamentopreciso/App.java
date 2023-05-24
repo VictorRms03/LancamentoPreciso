@@ -108,28 +108,28 @@ public class App extends Application {
         blocoMovimentoVertical.setY(250);
         blocoMovimentoVertical.setArcHeight(10);
         blocoMovimentoVertical.setArcWidth(10);
-        blocoMovimentoVertical.setFill(Color.CYAN);
-        blocoTextoOQueDesejaCalcular.setStroke(Color.WHITE);
+        blocoMovimentoVertical.setFill(Color.TURQUOISE);
         
         Text textoMovimentoVertical = new Text("Movimento Vertical");
-        textoMovimentoVertical.setX(65);
+        textoMovimentoVertical.setX(55);
         textoMovimentoVertical.setY(275);
-        textoMovimentoVertical.setFill(Color.BLACK);
+        textoMovimentoVertical.setFill(Color.WHITE);
         textoMovimentoVertical.setFont(Font.font("", 14));
+        textoMovimentoVertical.setStyle("-fx-font-weight:bold; ");
         
         Rectangle blocoMovimentoHorizontal = new Rectangle(180, 40);
         blocoMovimentoHorizontal.setX(285);
         blocoMovimentoHorizontal.setY(250);
         blocoMovimentoHorizontal.setArcHeight(10);
         blocoMovimentoHorizontal.setArcWidth(10);
-        blocoMovimentoHorizontal.setFill(Color.CYAN);
-        blocoTextoOQueDesejaCalcular.setStroke(Color.WHITE);
+        blocoMovimentoHorizontal.setFill(Color.TURQUOISE);
         
         Text textoMovimentoHorizontal = new Text("Movimento Horizontal");
-        textoMovimentoHorizontal.setX(305);
+        textoMovimentoHorizontal.setX(300);
         textoMovimentoHorizontal.setY(275);
-        textoMovimentoHorizontal.setFill(Color.BLACK);
+        textoMovimentoHorizontal.setFill(Color.WHITE);
         textoMovimentoHorizontal.setFont(Font.font("", 14));
+        textoMovimentoHorizontal.setStyle("-fx-font-weight:bold; ");
 
         Group abaOQueDesejaCalcular = new Group(blocoTextoOQueDesejaCalcular, textoOQueDesejaCalcular);
         
@@ -252,15 +252,18 @@ public class App extends Application {
         botaoEfetuarCalculo.setLayoutX(50); 
         botaoEfetuarCalculo.setLayoutY(450);
         botaoEfetuarCalculo.setMinSize(150, 40);
+        botaoEfetuarCalculo.setStyle("-fx-base: #ffffff; ");
         
         // Configuração Botão "Cancelar"
         Button botaoCancelar = new Button("Cancelar");
         botaoCancelar.setLayoutX(300);
         botaoCancelar.setLayoutY(450);
         botaoCancelar.setMinSize(150, 40);
+        botaoCancelar.setStyle("-fx-base: #ffffff; ");
         
         // Grupo Tela "EntradaDeDados"
-        Group grupoTelaEntradaDeDados = new Group(logoViewTelaEntradaDeDados, abaEntradaDasContas, botaoEfetuarCalculo, botaoCancelar, textoGravidade10);
+        Group grupoTelaEntradaDeDados = new Group(logoViewTelaEntradaDeDados, abaEntradaDasContas, botaoEfetuarCalculo,
+                botaoCancelar, textoGravidade10);
         
         // Configuração da Cena
         var telaEntradaDeDados = new Scene(grupoTelaEntradaDeDados, 500, 600);
@@ -270,7 +273,7 @@ public class App extends Application {
         
         // Configuração da Area de Graficos
         Rectangle blocoGrafico = new Rectangle(600, 300);
-        blocoGrafico.setX(500);
+        blocoGrafico.setX(100);
         blocoGrafico.setY(40);
         blocoGrafico.setHeight(430);
         blocoGrafico.setWidth(650);
@@ -313,7 +316,7 @@ public class App extends Application {
 
         //Creating a Group object  
         Group root = new Group(linechart);
-        root.setLayoutX(570);
+        root.setLayoutX(170);
         root.setLayoutY(45);
         root.setScaleX(1.2);
         root.setScaleY(1);
@@ -323,7 +326,7 @@ public class App extends Application {
         
         // Configuração Texto "Resultados"
         Rectangle blocoTextoResultados = new Rectangle(300, 40);
-        blocoTextoResultados.setX(500);
+        blocoTextoResultados.setX(100);
         blocoTextoResultados.setY(480);
         blocoTextoResultados.setFill(Color.WHITE);
         blocoTextoResultados.setStroke(Color.BLACK);
@@ -331,32 +334,39 @@ public class App extends Application {
         blocoTextoResultados.setArcWidth(10);
         
         Text textoResultados = new Text("*STRING RESULTADO*");
-        textoResultados.setX(525);
+        textoResultados.setX(125);
         textoResultados.setY(505);
         textoResultados.setFill(Color.BLACK);
         textoResultados.setFont(Font.font("", 14));
         
-        Group resultados = new Group(blocoTextoResultados, textoResultados);
+        Button voltarParaEntrada = new Button("Voltar");
+        voltarParaEntrada.setLayoutX(100);
+        voltarParaEntrada.setLayoutY(530);
+        voltarParaEntrada.setMinWidth(300);
+        voltarParaEntrada.setMinHeight(30);
+        voltarParaEntrada.setStyle("-fx-base: #ffffff; ");
+        
+        Group resultados = new Group(blocoTextoResultados, textoResultados, voltarParaEntrada);
         
         //Configuração Texto "Explicação"
         Rectangle blocoTextoExplicacao = new Rectangle(340, 80);
-        blocoTextoExplicacao.setX(810);
+        blocoTextoExplicacao.setX(410);
         blocoTextoExplicacao.setY(480);
         blocoTextoExplicacao.setFill(Color.WHITE);
         blocoTextoExplicacao.setStroke(Color.BLACK);
         blocoTextoExplicacao.setArcHeight(10);
         blocoTextoExplicacao.setArcWidth(10);
         
-        Text textoExplicacao = new Text("explicacão"); // fazer if no botão para mudar isso
-        textoExplicacao.setX(835);
-        textoExplicacao.setY(495);
+        Text textoExplicacao = new Text("explicacão"); 
+        textoExplicacao.setX(435);
+        textoExplicacao.setY(500);
         textoExplicacao.setFill(Color.BLACK);
         textoExplicacao.setFont(Font.font("", 14));
         
         Group explicacao = new Group(blocoTextoExplicacao, textoExplicacao);
         
         Group grupoTelaResultados = new Group(grafico, resultados, explicacao);
-        var telaResultados = new Scene (grupoTelaResultados, 1200, 600);
+        var telaResultados = new Scene (grupoTelaResultados, 850, 600);
         
         
         /*  **********************************************   CONFIGURAÇÃO DE FUNCIONALIDADES DE BOTÕES   ********************************************** */
@@ -450,6 +460,8 @@ public class App extends Application {
         botaoEfetuarCalculo.setOnAction(efetuarCalculo);
         
         botaoCancelar.setOnAction(abrirTelaSelecaoCalculo);
+        
+        voltarParaEntrada.setOnAction(abrirTelaSelecaoEixo);
         
         
         /*  **********************************************   SETTING DA CENA INICIAL   ********************************************** */
