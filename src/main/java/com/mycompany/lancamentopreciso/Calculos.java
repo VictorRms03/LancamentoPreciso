@@ -1,30 +1,31 @@
 package com.mycompany.lancamentopreciso;
 
-import java.util.ArrayList;
-
-public final class Calculos {
+public class Calculos {
     
     private double velocidadeInicial;
     private double angulo;
     private double resultado;
     private int qualEixo = 1;
     private int qualCalculo = 1;
-    private ArrayList listaPosicaoX = new ArrayList();
-    private ArrayList listaPosicaoY = new ArrayList();
+    private String unidadeResultado;
     
     // Construtor Padrão
     public Calculos(){}
     
-    // Calcula dependendo do "qualCalculo" selecionado
+    // Calcula dependendo do "qualCalculo" selecionado e define a unidade de medida.
     public double calcular (){
         switch (qualCalculo) {
             case 1:
+                unidadeResultado = "s";
                 return tempoSubida();
             case 2:
+                unidadeResultado = "s";
                 return tempoTotal();
             case 3:
+                unidadeResultado = "m";
                 return alturaMaxima();
             case 4:
+                unidadeResultado = "m";
                 return alcanceHorizontal();
             default:
                 break;
@@ -107,6 +108,10 @@ public final class Calculos {
         return resultado;
     }
     
+    public String getUnidadeResultado(){
+        return unidadeResultado;
+    }
+    
     public String getResultadoString(){
         switch (qualCalculo) {
             case 1:
@@ -127,20 +132,16 @@ public final class Calculos {
     public String getExplicacao(){
         switch (qualCalculo) {
             case 1:
-                return "O tempo de subida é igual ao tempo de \ndescida, logo, o tempo total é duas vezes o \ntempo de subida."; //explicacao TempoSubida
+                return "O tempo de subida é o tempo que leva para que \no objeto chegue ao ponto de altura máxima. \nApós este tempo, o objeto começará a perder \naltitude em vez de ganhar."; //explicacao TempoSubida
             case 2:
-                return "???????????????"; //explicacao TempoTotal
+                return "O tempo total é o tempo que leva para que o \nobjeto chegue ao chão novamente, este tempo é \ndefinido por 2 vezes o tempo de subida, uma vez \nque o tempo de descida é igual ao de subida."; //explicacao TempoTotal
             case 3:
                 return "A altura máxima do lançamento oblíquo pode \nser obtida utilizando as fórmulas do movimento \nuniformemente variado, já que ele está \nrelacionado com o movimento vertical."; //explicacao AlturaMaxima;
             case 4:
-                return "O alcance horizontal é a distância entre \nos pontos de partida e chegada do objeto \nlançado obliquamente."; //explicacao AlcanceHorizontal;
+                return "O alcance horizontal é a distância entre \nos pontos de partida e chegada do objeto \nlançado."; //explicacao AlcanceHorizontal;
             default:
                 break;
         }
         return "";
     }
-    
-    /* **************************************** GRAFICO ************************************ */
-    
-    
 }

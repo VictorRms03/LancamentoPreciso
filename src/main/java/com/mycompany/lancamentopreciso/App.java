@@ -226,6 +226,12 @@ public class App extends Application {
         velocidadeInicial.setMinSize(40, 20);
         velocidadeInicial.setMaxSize(40, 20);
         
+        Text unidadeVelocidadeInicial = new Text("m/s");
+        unidadeVelocidadeInicial.setX(410);
+        unidadeVelocidadeInicial.setY(310);
+        unidadeVelocidadeInicial.setFill(Color.BLACK);
+        unidadeVelocidadeInicial.setFont(Font.font("", 14));
+        
         Text textoAngulo = new Text("Angulo (Θ) =");
         textoAngulo.setX(115);
         textoAngulo.setY(345);
@@ -238,11 +244,17 @@ public class App extends Application {
         angulo.setMinSize(40, 20);
         angulo.setMaxSize(40, 20);
         
-        Group abaEntradaDasContas= new Group(blocoEntradaDeDados, textoEntradaDeDados, textoExemploFormula, textoVelocidadeInicial,
-                velocidadeInicial, textoAngulo, angulo);
+        Text unidadeAngulo = new Text("º");
+        unidadeAngulo.setX(410);
+        unidadeAngulo.setY(345);
+        unidadeAngulo.setFill(Color.BLACK);
+        unidadeAngulo.setFont(Font.font("", 14));
         
-        Text textoGravidade10 = new Text("ATENÇÃO: Gravidade(g) = 10 para todos os resultados");
-        textoGravidade10.setX(80);
+        Group abaEntradaDasContas= new Group(blocoEntradaDeDados, textoEntradaDeDados, textoExemploFormula, textoVelocidadeInicial,
+                velocidadeInicial, textoAngulo, angulo, unidadeVelocidadeInicial, unidadeAngulo);
+        
+        Text textoGravidade10 = new Text("ATENÇÃO: g = 10 para todos os resultados");
+        textoGravidade10.setX(120);
         textoGravidade10.setY(550);
         textoGravidade10.setFill(Color.BLACK);
         textoGravidade10.setFont(Font.font("", 14));
@@ -358,7 +370,7 @@ public class App extends Application {
         blocoTextoExplicacao.setArcWidth(10);
         
         Text textoExplicacao = new Text("explicacão"); 
-        textoExplicacao.setX(435);
+        textoExplicacao.setX(425);
         textoExplicacao.setY(500);
         textoExplicacao.setFill(Color.BLACK);
         textoExplicacao.setFont(Font.font("", 14));
@@ -435,7 +447,7 @@ public class App extends Application {
             calculo.setVelocidadeInicial(velocidadeInicial.getText());
             calculo.setAngulo(angulo.getText());
             calculo.setResultado(calculo.calcular());
-            textoResultados.setText(calculo.getResultadoString());
+            textoResultados.setText(calculo.getResultadoString() + " " + calculo.getUnidadeResultado());
             textoExplicacao.setText(calculo.getExplicacao());
             stage.setScene(telaResultados);
         };
