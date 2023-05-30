@@ -34,6 +34,8 @@ public class App extends Application {
         
         // Importação da Imagem Logo
         Image logo = new Image(new FileInputStream("logo.PNG"));
+        Image graficoEixoX = new Image(new FileInputStream("graficoEixoX.PNG"));
+        Image graficoEixoY = new Image(new FileInputStream("graficoEixoY.PNG"));
         
         /*  **********************************************   TELA SELEÇÃO DE EIXO   ********************************************** */  
         
@@ -294,47 +296,13 @@ public class App extends Application {
         blocoGrafico.setArcHeight(10);
         blocoGrafico.setArcWidth(10);
         
-        //Defining the x axis             
-        NumberAxis xAxis = new NumberAxis(0, 60, 5); 
-        xAxis.setLabel("T"); 
+        ImageView graficoView = new ImageView(graficoEixoX);
+        graficoView.setX(120);
+        graficoView.setY(50);
+        graficoView.setFitHeight(400);
+        graficoView.setFitWidth(600);
         
-        //Defining the y axis   
-        NumberAxis yAxis = new NumberAxis   (0, 300, 20); 
-        yAxis.setLabel("So"); 
-
-        //Creating the line chart 
-        LineChart linechart = new LineChart(xAxis, yAxis);
-
-
-        //Prepare XYChart.Series objects by setting data 
-        XYChart.Series series = new XYChart.Series(); 
-        series.setName("RESULTADO");
-
-        series.getData().add(new XYChart.Data(0, 0)); 
-        series.getData().add(new XYChart.Data(10, 30)); 
-        series.getData().add(new XYChart.Data(15, 60)); 
-        series.getData().add(new XYChart.Data(20, 90)); 
-        series.getData().add(new XYChart.Data(25, 120)); 
-        series.getData().add(new XYChart.Data(30, 150));
-        series.getData().add(new XYChart.Data(35, 180));
-        series.getData().add(new XYChart.Data(40, 210));
-        series.getData().add(new XYChart.Data(45, 240));
-        series.getData().add(new XYChart.Data(50, 270));
-        series.getData().add(new XYChart.Data(55, 300));
-        series.getData().add(new XYChart.Data(60, 300));
-
-        //Setting the data to Line chart    
-        linechart.getData().add(series);        
-
-        //Creating a Group object  
-        Group root = new Group(linechart);
-        root.setLayoutX(170);
-        root.setLayoutY(45);
-        root.setScaleX(1.2);
-        root.setScaleY(1);
-        
-        Group grafico = new Group(blocoGrafico, root);
-        
+        Group grafico = new Group(blocoGrafico, graficoView);
         
         // Configuração Texto "Resultados"
         Rectangle blocoTextoResultados = new Rectangle(300, 40);
@@ -386,11 +354,13 @@ public class App extends Application {
         EventHandler<ActionEvent> abrirSelecaoDeCalculoEixoX = (ActionEvent e) -> {
             calculo.setQualEixo(1);
             stage.setScene(telaSelecaoCalculo);
+            graficoView.setImage(graficoEixoX);
         };
         
         EventHandler<ActionEvent> abrirSelecaoDeCalculoEixoY = (ActionEvent e) -> {
             calculo.setQualEixo(2);
             stage.setScene(telaSelecaoCalculo);
+            graficoView.setImage(graficoEixoY);
         };
 
         // Funcionalidade para Abrir a tela Seleção de Eixos
