@@ -7,9 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,13 +24,17 @@ public class App extends Application {
         
         
         /* ***********************************************   DECLARAÇÃO DE OBJETOS   ********************************************** */
+        
+        // Declaração do Objeto que guardará e efetuara os calculos
         Calculos calculo = new Calculos();
-                
+        
                 
         /* ***********************************************   IMPORTAÇÕES   ********************************************** */
         
         // Importação da Imagem Logo
         Image logo = new Image(new FileInputStream("logo.PNG"));
+        
+        // Importação das Imagem Ilustrativas de Gráficos do resultado
         Image graficoEixoX = new Image(new FileInputStream("graficoEixoX.PNG"));
         Image graficoEixoY = new Image(new FileInputStream("graficoEixoY.PNG"));
         
@@ -75,9 +76,7 @@ public class App extends Application {
         
         // Grupo Tela Principal
         Group selecaoDeEixo = new Group(blocoSelecaoDeEixo, textoSelecaoDeEixo, botoesHorizontalVertical);
-       
         Group grupoTelaSelecaoDeEixo = new Group(logoViewTelaSelecaoEixo, selecaoDeEixo);
-        
         var telaSelecaoDeEixo = new Scene(grupoTelaSelecaoDeEixo,500, 600);
         
         
